@@ -12,21 +12,21 @@ namespace TransacaoFinanceira
 
         static void Main(string[] args)
         {
-            Transacao[] TRANSACOES = new Transacao[] { new Transacao (1,"09/09/2023 14:15:00", 938485762, 2147483649, 150),
-                                                        new Transacao (2,"09/09/2023 14:15:05", 2147483649, 210385733, 149),
-                                                        new Transacao (3,"09/09/2023 14:15:29", 347586970, 238596054, 1100),
-                                                        new Transacao (4,"09/09/2023 14:17:00", 675869708, 210385733, 5300),
-                                                        new Transacao (5,"09/09/2023 14:18:00", 238596054, 674038564, 1489),
-                                                        new Transacao (6,"09/09/2023 14:18:20", 573659065, 563856300, 49),
-                                                        new Transacao (7,"09/09/2023 14:19:00", 938485762, 2147483649, 44),
-                                                        new Transacao (8,"09/09/2023 14:19:01", 573659065, 675869708, 150)
+            Transacao[] TRANSACOES = new Transacao[] {  
+                new Transacao (1,"09/09/2023 14:15:00", 938485762, 2147483649, 150),
+                new Transacao (2,"09/09/2023 14:15:05", 2147483649, 210385733, 149),
+                new Transacao (3,"09/09/2023 14:15:29", 347586970, 238596054, 1100),
+                new Transacao (4,"09/09/2023 14:17:00", 675869708, 210385733, 5300),
+                new Transacao (5,"09/09/2023 14:18:00", 238596054, 674038564, 1489),
+                new Transacao (6,"09/09/2023 14:18:20", 573659065, 563856300, 49),
+                new Transacao (7,"09/09/2023 14:19:00", 938485762, 2147483649, 44),
+                new Transacao (8,"09/09/2023 14:19:01", 573659065, 675869708, 150)
             };
             executarTransacaoFinanceira executor = new executarTransacaoFinanceira();
-            Parallel.ForEach(TRANSACOES, item =>
+            foreach (var item in TRANSACOES)
             {
                 executor.transferir(item.CorrelationId, item.ContaOrigem, item.ContaDestino, item.Valor);
-            });
-
+            }
         }
     }
 
@@ -37,7 +37,7 @@ namespace TransacaoFinanceira
             contas_saldo conta_saldo_origem = getSaldo<contas_saldo>(conta_origem) ;
             if (conta_saldo_origem.saldo < valor)
             {
-                Console.WriteLine("Transacao numero {0 } foi cancelada por falta de saldo", correlation_id);
+                Console.WriteLine("Transacao numero {0} foi cancelada por falta de saldo", correlation_id);
 
             }
             else
@@ -45,7 +45,7 @@ namespace TransacaoFinanceira
                 contas_saldo conta_saldo_destino = getSaldo<contas_saldo>(conta_destino);
                 conta_saldo_origem.saldo -= valor;
                 conta_saldo_destino.saldo += valor;
-                Console.WriteLine("Transacao numero {0} foi efetivada com sucesso! Novos saldos: Conta Origem:{1} | Conta Destino: {3}", correlation_id, conta_saldo_origem.saldo, conta_saldo_destino.saldo);
+                Console.WriteLine("Transacao numero {0} foi efetivada com sucesso! Novos saldos: Conta Origem:{1} | Conta Destino: {2}", correlation_id, conta_saldo_origem.saldo, conta_saldo_destino.saldo);
             }
         }
     }
