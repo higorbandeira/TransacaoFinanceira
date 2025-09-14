@@ -12,20 +12,19 @@ namespace TransacaoFinanceira
 
         static void Main(string[] args)
         {
-            var TRANSACOES = new[] { new {correlation_id= 1,datetime="09/09/2023 14:15:00", conta_origem= 938485762, conta_destino= 2147483649, VALOR= 150},
-                                     new {correlation_id= 2,datetime="09/09/2023 14:15:05", conta_origem= 2147483649, conta_destino= 210385733, VALOR= 149},
-                                     new {correlation_id= 3,datetime="09/09/2023 14:15:29", conta_origem= 347586970, conta_destino= 238596054, VALOR= 1100},
-                                     new {correlation_id= 4,datetime="09/09/2023 14:17:00", conta_origem= 675869708, conta_destino= 210385733, VALOR= 5300},
-                                     new {correlation_id= 5,datetime="09/09/2023 14:18:00", conta_origem= 238596054, conta_destino= 674038564, VALOR= 1489},
-                                     new {correlation_id= 6,datetime="09/09/2023 14:18:20", conta_origem= 573659065, conta_destino= 563856300, VALOR= 49},
-                                     new {correlation_id= 7,datetime="09/09/2023 14:19:00", conta_origem= 938485762, conta_destino= 2147483649, VALOR= 44},
-                                     new {correlation_id= 8,datetime="09/09/2023 14:19:01", conta_origem= 573659065, conta_destino= 675869708, VALOR= 150},
-
+            Transacao[] TRANSACOES = new Transacao[] { new Transacao (1,"09/09/2023 14:15:00", 938485762, 2147483649, 150),
+                                                        new Transacao (2,"09/09/2023 14:15:05", 2147483649, 210385733, 149),
+                                                        new Transacao (3,"09/09/2023 14:15:29", 347586970, 238596054, 1100),
+                                                        new Transacao (4,"09/09/2023 14:17:00", 675869708, 210385733, 5300),
+                                                        new Transacao (5,"09/09/2023 14:18:00", 238596054, 674038564, 1489),
+                                                        new Transacao (6,"09/09/2023 14:18:20", 573659065, 563856300, 49),
+                                                        new Transacao (7,"09/09/2023 14:19:00", 938485762, 2147483649, 44),
+                                                        new Transacao (8,"09/09/2023 14:19:01", 573659065, 675869708, 150)
             };
             executarTransacaoFinanceira executor = new executarTransacaoFinanceira();
             Parallel.ForEach(TRANSACOES, item =>
             {
-                executor.transferir(item.correlation_id, item.conta_origem, item.conta_destino, item.VALOR);
+                executor.transferir(item.CorrelationId, item.ContaOrigem, item.ContaDestino, item.Valor);
             });
 
         }
@@ -33,7 +32,7 @@ namespace TransacaoFinanceira
 
     class executarTransacaoFinanceira: acessoDados
     {
-        public void transferir(int correlation_id, int conta_origem, int conta_destino, decimal valor)
+        public void transferir(int correlation_id, uint conta_origem, uint conta_destino, decimal valor)
         {
             contas_saldo conta_saldo_origem = getSaldo<contas_saldo>(conta_origem) ;
             if (conta_saldo_origem.saldo < valor)
@@ -50,14 +49,35 @@ namespace TransacaoFinanceira
             }
         }
     }
+    class Transacao
+    {
+        public int CorrelationId { get; set; }
+        public DateTime Datetime { get; set; }
+        public uint ContaOrigem { get; set; }
+        public uint ContaDestino { get; set; }
+        public decimal Valor { get; set; }
+
+        public Transacao(int correlationId,
+            string datetime,
+            uint contaOrigem,
+            uint contaDestino,
+            decimal valor)
+        {
+            this.CorrelationId = correlationId;
+            this.Datetime = Convert.ToDateTime(datetime);
+            this.ContaOrigem = contaOrigem;
+            this.ContaDestino = contaDestino;
+            this.Valor = valor;
+        }
+    }
     class contas_saldo
     {
-        public contas_saldo(int conta, decimal valor)
+        public contas_saldo(uint conta, decimal valor)
         {
             this.conta = conta;
             this.saldo = valor;
         }
-        public int conta { get; set; }
+        public uint conta { get; set; }
         public decimal saldo { get; set; }
     }
     class acessoDados
@@ -82,7 +102,7 @@ namespace TransacaoFinanceira
             this.SALDOS.Add(938485762, 180);
            
         }
-        public T getSaldo<T>(int id)
+        public T getSaldo<T>(uint id)
         {          
             return (T)Convert.ChangeType(TABELA_SALDOS.Find(x => x.conta == id), typeof(T));
         }
