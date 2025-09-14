@@ -1,0 +1,131 @@
+# Arquivos de usuário gerados pelo Visual Studio
+*.user
+*.userosscache
+*.sln.docstates
+
+# Arquivos de build
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Arquivos do Visual Studio 2015/2017/2019/2022
+.vs/
+.vscode/
+*.vcxproj.user
+*.vcxproj.filters
+*.VC.db
+*.VC.VC.opendb
+
+# Arquivos de cache do Visual Studio
+*.aps
+*.ncb
+*.opendb
+*.opensdf
+*.sdf
+*.cachefile
+*.db
+
+# Arquivos de debug
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+
+# Pacotes NuGet
+[Nn]u[Pp]ackages/
+*.nupkg
+packages/
+
+# Arquivos de backup e migração
+*.backup
+*.bak
+*.gho
+*.ori
+*.orig
+*.tmp
+
+# IntelliSense
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc
+
+# Arquivos de publicação
+publish/
+
+# Arquivos de teste
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# Projetos de banco de dados
+*.mdf
+*.ldf
+*.sdf
+
+# Projetos web
+App_Data/
+[Bb]uild/
+[Pp]ackages/
+
+# Windows Azure
+*.csdef
+*.cscfg
+*.ccproj
+*.wapproj
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Python
+__pycache__/
+*.py[cod]
+
+# MSTest
+*.Test.xml
+
+# Resharper
+_ReSharper*/
+*.ReSharper
+
+# StyleCop
+StyleCopReport.xml
+
+# Arquivos de sessão do Visual Studio
+*.vsp
+*.vspx
+*.sap
+
+# TFS
+*.tfstate
+*.tfsignore
+
+# Arquivos temporários
+*.tmp
+*.temp
+
+# MacOS
+.DS_Store
+
+# Linux/Unix
+*~
+
+# Rider
+.idea/
+*.sln.iml
+
+# VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
