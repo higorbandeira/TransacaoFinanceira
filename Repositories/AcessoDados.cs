@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TransacaoFinanceira.Models;
 using TransacaoFinanceira.Repositories.interfaces;
 
@@ -23,19 +22,9 @@ namespace TransacaoFinanceira.Repositories
             TabelaSaldos.Add(new ContasSaldo(563856300, 150));
         }
 
-        public T GetSaldo<T>(uint id)
+        public ContasSaldo GetContasSaldo(uint id)
         {
-            return (T)Convert.ChangeType(TabelaSaldos.Find(x => x.Conta == id), typeof(T));
-        }
-
-        public void Debitar(ContasSaldo destino, decimal valor)
-        {
-            destino.Saldo -= valor;
-        }
-
-        public void Creditar(ContasSaldo destino, decimal valor)
-        {
-            destino.Saldo += valor;
+            return TabelaSaldos.Find(x => x.Conta == id);
         }
 
         public Transacao[] GetTransacoes()

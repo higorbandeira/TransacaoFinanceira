@@ -24,18 +24,20 @@ namespace TransacaoFinanceira.Services
 
         private void Transferir(int correlation_id, uint conta_origem, uint conta_destino, decimal valor)
         {
-            ContasSaldo conta_saldo_origem = _acessoDados.GetSaldo<ContasSaldo>(conta_origem);
+            ContasSaldo conta_saldo_origem = _acessoDados.GetContasSaldo(conta_origem);
             if (conta_saldo_origem.Saldo < valor)
             {
                 Console.WriteLine("Transacao numero {0} foi cancelada por falta de saldo", correlation_id);
             }
             else
             {
-                ContasSaldo conta_saldo_destino = _acessoDados.GetSaldo<ContasSaldo>(conta_destino);
-                _acessoDados.Debitar(conta_saldo_origem, valor);
-                _acessoDados.Creditar(conta_saldo_destino, valor);
+                ContasSaldo conta_saldo_destino = _acessoDados.GetContasSaldo(conta_destino);
+                conta_saldo_origem.Debitar(valor);
+                conta_saldo_destino.Creditar(valor);
                 Console.WriteLine("Transacao numero {0} foi efetivada com sucesso! Novos saldos: Conta Origem:{1} | Conta Destino: {2}", correlation_id, conta_saldo_origem.Saldo, conta_saldo_destino.Saldo);
             }
         }
+
+
     }
 }

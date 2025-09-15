@@ -15,5 +15,15 @@ namespace TransacaoFinanceira.Models
         }
         public uint Conta { get; set; }
         public decimal Saldo { get; set; }
+
+        public void Debitar(decimal valor)
+        {
+            Saldo -= valor;
+        }
+
+        public void Creditar(decimal valor)
+        {
+            Saldo += valor;
+        }
     }
 }
