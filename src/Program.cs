@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using TransacaoFinanceira.Models;
+﻿using TransacaoFinanceira.Models;
 using TransacaoFinanceira.Repositories;
 using TransacaoFinanceira.Repositories.interfaces;
 using TransacaoFinanceira.Services;

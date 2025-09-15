@@ -29,7 +29,7 @@ namespace TransacaoFinanceira.Repositories
 
         public Transacao[] GetTransacoes()
         {
-            return  new Transacao[] {
+            return new Transacao[] {
                 new Transacao (1,"09/09/2023 14:15:00", 938485762, 2147483649, 150),
                 new Transacao (2,"09/09/2023 14:15:05", 2147483649, 210385733, 149),
                 new Transacao (3,"09/09/2023 14:15:29", 347586970, 238596054, 1100),
